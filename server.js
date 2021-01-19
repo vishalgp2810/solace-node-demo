@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || '8000';
 require('dotenv').config();
 
-/*middleware*/
+/*middlewares*/
 app.use(bodyParser.json({
   limit: '150mb',
   verify: (req, res, buf) => { req.rawBody = buf; }
@@ -28,9 +28,15 @@ mongoose.connect(conectionUrl, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => console.info('MongoDb Connected....')).catch(err => console.log(err));
+}).then(() =>
+  console.info('MongoDb Connected....')
+).catch(err => console.log(err));
 
 mongoose.Promise = global.Promise;
+
+app.get('/', (req, res) => {
+  res.send('Welcome to demo!')
+})
 
 /*Incudes all routes*/
 require('./routes/index')(app, mongoose);

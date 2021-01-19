@@ -27,7 +27,7 @@ module.exports = (app, connection) => {
             product_descreption: req.body.product_descreption,
             product_category: req.body.product_category,
             timestamp: new Date()
-        }
+        };
         const product = new productSchema(postData);
         product.save().then(response => {
             return res.send({ message: 'Product created sucessfully', product: response });
@@ -79,4 +79,4 @@ module.exports = (app, connection) => {
             return res.status(400).json({ message: 'Error while deleting product', err });
         });
     });
-}
+};
