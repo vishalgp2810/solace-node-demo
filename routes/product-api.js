@@ -18,10 +18,10 @@ module.exports = (app, connection) => {
     app.use(bodyParser.json());
 
     /*Create prodcut API*/
-    app.post("/api/product", upload.single('profile'), (req, res) => {
+    app.post("/api/product", (req, res) => {
         const postData = {
             product_name: req.body.product_name,
-            product_image: req.file.path,
+            product_image: req.body.product_image,
             product_price: req.body.product_price,
             product_rating: req.body.product_rating,
             product_descreption: req.body.product_descreption,
@@ -61,12 +61,14 @@ module.exports = (app, connection) => {
     app.put('/api/product/:id', (req, res) => {
         const query = { _id: req.params.id };
         const update = req.body;
+        update.product_image = req.file.path;
         const options = { "upsert": false };
         productSchema.updateOne(query, update, options)
             .then(result => {
                 console.log(result)
-                return res.send(result);
+                return res.send({message : 'Product updated', result});
             }).catch(err => {
+                console.log('error',error)
                 return res.send(err);
             });
     });
