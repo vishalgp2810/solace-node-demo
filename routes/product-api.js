@@ -61,7 +61,6 @@ module.exports = (app, connection) => {
     app.put('/api/product/:id', (req, res) => {
         const query = { _id: req.params.id };
         const update = req.body;
-        update.product_image = req.file.path;
         const options = { "upsert": false };
         productSchema.updateOne(query, update, options)
             .then(result => {
