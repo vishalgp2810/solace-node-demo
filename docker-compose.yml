@@ -1,0 +1,18 @@
+version: "2"
+services:
+  authapi:
+    restart: always
+    build: .
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - authmongo
+  authmongo:
+    restart: always
+    image: mongo:3.4.10
+    volumes:
+      - ./authdata:/data/db
+    # ports:
+    #  - "27017:27017"
