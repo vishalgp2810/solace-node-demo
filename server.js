@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require("mongoose");
-const PORT = process.env.PORT || '8000';
+const PORT = process.env.PORT || '9000';
 require('dotenv').config();
 
 /*middlewares*/
